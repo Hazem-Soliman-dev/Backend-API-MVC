@@ -2,13 +2,14 @@ const User = require("../models/user.model");
 const hashing = require("../utili/hashing");
 const auth = require("../utili/auth");
 
+require("dotenv").config();
+
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
-  const nameRegex = /^[a-zA-Z\s]+$/;
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])[a-zA-Z0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]+$/;
+  const nameRegex = process.env.REGEX_NAME;
+  const emailRegex = process.env.REGEX_EMAIL;
+  const passwordRegex = process.env.REGEX_PASSWORD;
 
   const validationErrors = [
     !name && "Name is required",

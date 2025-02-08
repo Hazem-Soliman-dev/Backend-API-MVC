@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
-const secretKey =
-  "cx#I6MgD('8-3{cuZ*-(o5/OwfAwpgrnxcD*}?YNf^W.$3Cj4:_4L_=@RBDn)+5";
+
+require("dotenv").config();
+
+const secretKey = process.env.SECRET_KEY;
 
 exports.createAccessToken = (data) => jwt.sign(data, secretKey, { expiresIn: "8h" });
 

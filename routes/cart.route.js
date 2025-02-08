@@ -1,25 +1,17 @@
 const express = require("express");
+const cartController = require("../controllers/cart.controller");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  // Get user's cart
-  res.json("cart");
-});
+router.get("/:id", cartController.getCart);
 
-router.post("/", (req, res) => {
-  // Add product to cart
-  res.json(req.body);
-});
+router.post("/:id", cartController.addToCart);
 
-router.patch("/:id", (req, res) => {
-  // Update product quantity in cart
-  res.json({ message: `Updating product ${req.params.id}`, data: req.body });
-});
+// Update product quantity in cart
+router.patch("/:id", cartController.updateCart);
 
-router.delete("/:id", (req, res) => {
-  // Remove product from cart
-  res.json({ message: `Deleting product ${req.params.id}` });
-});
+router.delete("/:id", cartController.removeFromCart);
+
+router.delete("/clear/:id", cartController.clearCart);
 
 module.exports = router;
